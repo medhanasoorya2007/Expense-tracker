@@ -11,6 +11,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Wallet, User, LogOut } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 
+
 // Route → Page title mapping
 const PAGE_TITLES = {
   "/dashboard": "Dashboard",
@@ -19,7 +20,7 @@ const PAGE_TITLES = {
   "/profile": "Profile",
 };
 
-function Navbar() {
+function Navbar({ onMenuToggle }) {
 
   // Auth & Navigation
 
@@ -68,6 +69,15 @@ function Navbar() {
           Logo + Current Page Title */}
 
       <div className="navbar-left">
+        <button
+          type="button"
+          className="navbar-menu-btn"
+          onClick={onMenuToggle}
+          aria-label="Toggle navigation menu"
+        >
+          <Menu size={22} />
+        </button>
+
         <div className="navbar-logo">
           <Wallet size={20} />
           <span>Expense Tracker</span>

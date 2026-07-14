@@ -150,6 +150,23 @@ img {
   gap: 20px;
 }
 
+.navbar-menu-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  border: none;
+  background: none;
+  color: #111111;
+  cursor: pointer;
+}
+
+.navbar-menu-btn:hover {
+  background: #F8F9FA;
+}
+
 .navbar-logo {
   display: flex;
   align-items: center;
@@ -374,6 +391,14 @@ img {
 }
 
 @media (max-width: 768px) {
+  .navbar-menu-btn {
+    display: flex;
+  }
+
+  .app-main {
+    margin-left: 0;
+  }
+
   .sidebar {
     transform: translateX(-100%);
   }
