@@ -802,13 +802,20 @@ select.form-input {
   gap: 16px;
 }
 
+@media (max-width: 900px) {
+  .chart-row {
+    grid-template-columns: 1fr;
+    /* stacks charts on top of each other */
+  }
+}
+
 .dashboard-charts {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
 }
 
-.dashboard-charts > .chart-card {
+.dashboard-charts>.chart-card {
   min-width: 0;
 }
 
@@ -1510,7 +1517,7 @@ select.form-input {
     gap: 12px;
   }
 
-  .dashboard-charts > .chart-card,
+  .dashboard-charts>.chart-card,
   .dashboard-charts .chart-card--full {
     grid-column: auto;
     width: 100%;

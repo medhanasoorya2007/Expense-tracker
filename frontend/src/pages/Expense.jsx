@@ -215,7 +215,7 @@ function Expense() {
       </div>
 
       {/* Charts */}
-      <div className="dashboard-charts">
+      <div className="chart-row">
         <div className="chart-card">
           <h2 className="chart-card-title">Expense by Category</h2>
           {pieData.length === 0 ? (

@@ -35,15 +35,15 @@ const EMPTY_FORM = {
 };
 
 function Income() {
-  const [incomes, setIncomes]   = useState([]);
-  const [loading, setLoading]   = useState(true);
-  const [error, setError]       = useState("");
+  const [incomes, setIncomes] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   // Modal state
-  const [modalOpen, setModalOpen]   = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
   const [editRecord, setEditRecord] = useState(null); // null = adding new
-  const [form, setForm]             = useState(EMPTY_FORM);
-  const [formError, setFormError]   = useState("");
+  const [form, setForm] = useState(EMPTY_FORM);
+  const [formError, setFormError] = useState("");
   const [formLoading, setFormLoading] = useState(false);
 
   // Confirm-delete state
@@ -81,9 +81,9 @@ function Income() {
     setEditRecord(income);
     setForm({
       description: income.description,
-      category:    income.category,
-      amount:      String(income.amount),
-      date:        income.date ? income.date.split("T")[0] : "",
+      category: income.category,
+      amount: String(income.amount),
+      date: income.date ? income.date.split("T")[0] : "",
     });
     setFormError("");
     setModalOpen(true);
@@ -122,15 +122,15 @@ function Income() {
         // Edit — backend only accepts description + amount
         await api.put(`/income/update/${editRecord._id}`, {
           description: form.description,
-          amount:      Number(form.amount),
+          amount: Number(form.amount),
         });
       } else {
         // Add — backend accepts description, amount, category, date
         await api.post("/income/add", {
           description: form.description,
-          amount:      Number(form.amount),
-          category:    form.category,
-          date:        form.date,
+          amount: Number(form.amount),
+          category: form.category,
+          date: form.date,
         });
       }
       closeModal();
@@ -163,9 +163,9 @@ function Income() {
       const res = await api.get("/income/downloadexcel", {
         responseType: "blob",
       });
-      const url  = window.URL.createObjectURL(new Blob([res.data]));
+      const url = window.URL.createObjectURL(new Blob([res.data]));
       const link = document.createElement("a");
-      link.href  = url;
+      link.href = url;
       link.setAttribute("download", "income_details.xlsx");
       document.body.appendChild(link);
       link.click();
@@ -218,7 +218,7 @@ function Income() {
       </div>
 
       {/* Charts */}
-      <div className="dashboard-charts">
+      <div className="chart-row">
         <div className="chart-card">
           <h2 className="chart-card-title">Income by Category</h2>
           {pieData.length === 0 ? (
@@ -376,8 +376,8 @@ function Income() {
               {formLoading
                 ? "Saving…"
                 : editRecord
-                ? "Save Changes"
-                : "Add Income"}
+                  ? "Save Changes"
+                  : "Add Income"}
             </button>
           </div>
         </form>

@@ -123,7 +123,7 @@ function Dashboard() {
       </div>
 
       {/* ── Charts row ───────────────────────────────────────────────────── */}
-      <div className="dashboard-charts">
+      <div className="chart-row">
         {/* Pie chart */}
         <div className="chart-card">
           <h2 className="chart-card-title">Income vs Expense</h2>
