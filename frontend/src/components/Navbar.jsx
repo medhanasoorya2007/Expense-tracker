@@ -8,7 +8,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Wallet, User, LogOut } from "lucide-react";
+import { Wallet, User, LogOut, Menu } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 
 
