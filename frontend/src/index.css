@@ -802,6 +802,20 @@ select.form-input {
   gap: 16px;
 }
 
+.dashboard-charts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.dashboard-charts > .chart-card {
+  min-width: 0;
+}
+
+.dashboard-charts .chart-card--full {
+  grid-column: 1 / -1;
+}
+
 .chart-card {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -1487,6 +1501,19 @@ select.form-input {
 
   .chart-row {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-charts {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .dashboard-charts > .chart-card,
+  .dashboard-charts .chart-card--full {
+    grid-column: auto;
+    width: 100%;
   }
 }
 

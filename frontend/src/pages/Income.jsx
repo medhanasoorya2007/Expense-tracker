@@ -218,7 +218,7 @@ function Income() {
       </div>
 
       {/* Charts */}
-      <div className="dashboard-charts" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
+      <div className="dashboard-charts">
         <div className="chart-card">
           <h2 className="chart-card-title">Income by Category</h2>
           {pieData.length === 0 ? (
