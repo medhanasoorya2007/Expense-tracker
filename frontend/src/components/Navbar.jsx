@@ -10,8 +10,6 @@ import { useState, useRef, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Wallet, User, LogOut, Menu } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
-
-
 // Route → Page title mapping
 const PAGE_TITLES = {
   "/dashboard": "Dashboard",
@@ -79,7 +77,7 @@ function Navbar({ onMenuToggle }) {
         </button>
 
         <div className="navbar-logo">
-          <Wallet size={20} />
+          <img src="/image.png" alt="Logo" className="logo" />
           <span>Expense Tracker</span>
         </div>
 
