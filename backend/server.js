@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 5000;
 // Middleware
 app.use(
   cors({
-    origin: "https://expense-tracker-frontend-rho-seven.vercel.app",
+    origin: 'https://expenseflow-plus.vercel.app',
     credentials: true,
   })
 );
@@ -24,10 +24,10 @@ app.use(express.urlencoded({ extended: true }));
 connectDB();
 
 // ROUTES
-app.use("/api/user", userRouter);
-app.use("/api/income", incomeRouter);
-app.use("/api/expense", expenseRouter);
-app.use("/api/dashboard", dashboardRouter);
+app.use('/api/user', userRouter);
+app.use('/api/income', incomeRouter);
+app.use('/api/expense', expenseRouter);
+app.use('/api/dashboard', dashboardRouter);
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
