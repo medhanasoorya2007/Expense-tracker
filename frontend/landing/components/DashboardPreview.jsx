@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { BarChart3, Landmark, LayoutDashboard, Plus, ReceiptText, Settings } from 'lucide-react';
 
 /**
  * ============================================================================
@@ -102,35 +103,35 @@ export default function DashboardPreview() {
               className={`dash-menu-item ${activeTab === 'Overview' ? 'active' : ''}`}
               onClick={() => setActiveTab('Overview')}
             >
-              <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>dashboard</span>
+              <LayoutDashboard size={18} aria-hidden="true" />
               Overview
             </div>
             <div 
               className={`dash-menu-item ${activeTab === 'Transactions' ? 'active' : ''}`}
               onClick={() => setActiveTab('Transactions')}
             >
-              <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>receipt_long</span>
+              <ReceiptText size={18} aria-hidden="true" />
               Transactions
             </div>
             <div 
               className={`dash-menu-item ${activeTab === 'Analytics' ? 'active' : ''}`}
               onClick={() => setActiveTab('Analytics')}
             >
-              <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>insights</span>
+              <BarChart3 size={18} aria-hidden="true" />
               Analytics
             </div>
             <div 
               className={`dash-menu-item ${activeTab === 'Budgets' ? 'active' : ''}`}
               onClick={() => setActiveTab('Budgets')}
             >
-              <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>account_balance</span>
+              <Landmark size={18} aria-hidden="true" />
               Budgets
             </div>
             <div 
               className={`dash-menu-item ${activeTab === 'Settings' ? 'active' : ''}`}
               onClick={() => setActiveTab('Settings')}
             >
-              <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>settings</span>
+              <Settings size={18} aria-hidden="true" />
               Settings
             </div>
           </aside>
@@ -178,7 +179,7 @@ export default function DashboardPreview() {
                 style={{ padding: '6px 14px', fontSize: '0.8rem' }}
                 onClick={() => setShowAddForm(!showAddForm)}
               >
-                <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>add</span>
+                <Plus size={16} aria-hidden="true" />
                 {showAddForm ? 'Cancel' : 'Add Expense'}
               </button>
             </div>

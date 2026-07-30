@@ -1,4 +1,5 @@
 import React from 'react';
+import { CalendarDays, ChartLine, ShieldCheck, WalletCards } from 'lucide-react';
 
 /**
  * ============================================================================
@@ -22,25 +23,25 @@ export default function FeatureGrid() {
   const features = [
     {
       id: 1,
-      icon: 'auto_graph',
+      Icon: ChartLine,
       title: 'Smart Expense Tracking',
       description: 'Automatically capture every expense from connected accounts and categorize them using advanced AI algorithms.'
     },
     {
       id: 2,
-      icon: 'calendar_today',
+      Icon: CalendarDays,
       title: 'Budget Planning',
       description: 'Create dynamic budgets that adjust to your spending patterns and alert you before you reach your limits.'
     },
     {
       id: 3,
-      icon: 'monitoring',
+      Icon: WalletCards,
       title: 'Real-Time Analytics',
       description: 'Visualize your net worth, cash flow, and investment performance with stunning interactive dashboards.'
     },
     {
       id: 4,
-      icon: 'security',
+      Icon: ShieldCheck,
       title: 'Secure Data Management',
       description: 'Bank-grade encryption ensures your data stays private and protected at all times. Your privacy is our priority.'
     }
@@ -60,9 +61,7 @@ export default function FeatureGrid() {
           {features.map((feature) => (
             <div key={feature.id} className="feature-card">
               <div className="feature-icon-box">
-                <span className="material-symbols-outlined" style={{ fontSize: '24px' }}>
-                  {feature.icon}
-                </span>
+                <feature.Icon size={24} aria-hidden="true" />
               </div>
               <h3>{feature.title}</h3>
               <p>{feature.description}</p>

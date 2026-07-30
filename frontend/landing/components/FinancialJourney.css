@@ -106,6 +106,7 @@
   font-size: 1rem;
   line-height: 1.6;
   max-width: 380px;
+  font-weight: 700;
 }
 
 /* ==========================================================================
@@ -314,6 +315,14 @@
     top: 1030px;
     left: 18%;
     transform: rotate(-3deg);
+  }
+
+  .fj-card-2-subtitle {
+    position: absolute;
+    top: 470px;
+    left: 48%;
+    width: 350px;
+    z-index: 5;
   }
 }
 

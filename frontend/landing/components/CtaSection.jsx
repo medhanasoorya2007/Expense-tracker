@@ -25,12 +25,7 @@ export default function CtaSection({ onOpenGetStarted }) {
 
       <button className="btn-cta-large" onClick={onOpenGetStarted}>
         Start Tracking Free
-        <span
-          className="material-symbols-outlined"
-          style={{ fontSize: '20px' }}
-        >
-          <MoveRight />
-        </span>
+        <MoveRight size={20} aria-hidden="true" />
       </button>
     </section>
   );

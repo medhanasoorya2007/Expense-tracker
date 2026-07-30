@@ -1,4 +1,5 @@
 import React from 'react';
+import { ArrowLeftRight, CircleDollarSign, ListChecks, TrendingUp } from 'lucide-react';
 
 /**
  * ============================================================================
@@ -22,14 +23,14 @@ export default function StatsSection() {
   const stats = [
     {
       id: 1,
-      icon: 'sync_alt',
+      Icon: ArrowLeftRight,
       value: '1.2',
       suffix: '',
       label: 'TRANSACTIONS TRACKED'
     },
     {
       id: 2,
-      icon: 'payments',
+      Icon: CircleDollarSign,
       value: '450',
       prefix: '$',
       suffix: 'M+',
@@ -37,14 +38,14 @@ export default function StatsSection() {
     },
     {
       id: 3,
-      icon: 'trending_up',
+      Icon: TrendingUp,
       value: '25',
       suffix: '%',
       label: 'AVG. SAVINGS ACHIEVED'
     },
     {
       id: 4,
-      icon: 'rule',
+      Icon: ListChecks,
       value: '10',
       suffix: 'k+',
       label: 'BUDGETS CREATED'
@@ -56,9 +57,7 @@ export default function StatsSection() {
       <div className="stats-grid">
         {stats.map((stat) => (
           <div key={stat.id} className="stat-metric-card">
-            <span className="material-symbols-outlined stat-icon">
-              {stat.icon}
-            </span>
+            <stat.Icon className="stat-icon" aria-hidden="true" />
             <div className="stat-number">
               {stat.prefix || ''}{stat.value}{stat.suffix || ''}
             </div>

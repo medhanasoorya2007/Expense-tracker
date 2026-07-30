@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Menu, Wallet, X } from 'lucide-react';
 
 /**
  * ============================================================================
@@ -26,7 +27,7 @@ export default function Navbar({ onOpenLogin, onOpenGetStarted }) {
         {/* Brand Logo & Icon */}
         <a href="#" className="brand-logo" aria-label="ExpenseFlow Home">
           <div className="brand-icon-box">
-            <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>account_balance_wallet</span>
+            <Wallet size={18} aria-hidden="true" />
           </div>
           ExpenseFlow
         </a>
@@ -52,11 +53,10 @@ export default function Navbar({ onOpenLogin, onOpenGetStarted }) {
           <button 
             className="mobile-toggle" 
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle Navigation Menu"
+            aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+            title={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
           >
-            <span className="material-symbols-outlined">
-              {mobileMenuOpen ? 'close' : 'menu'}
-            </span>
+            {mobileMenuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
           </button>
         </div>
       </div>

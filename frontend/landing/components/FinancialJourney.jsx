@@ -95,7 +95,7 @@ export default function FinancialJourney() {
   return (
     <section id="platform" ref={containerRef} className="fj-section">
       <div className="fj-container">
-        {/* Header Block: Badge, Title & Narrative Description */}
+        {/* Header Block: Badge & Title */}
         <div className="fj-header">
           <div className="fj-badge">Financial Journey</div>
           <h2 className="fj-title">
@@ -117,11 +117,6 @@ export default function FinancialJourney() {
               />
             </svg>
           </h2>
-          <p className="fj-subtitle">
-            Follow your financial journey with ExpenseFlow. Track every
-            transaction, understand your spending habits, build better budgets,
-            and reach your savings goals with confidence.
-          </p>
         </div>
 
         {/* Desktop Animated SVG Path with Framer Motion Reveal Mask */}
@@ -215,6 +210,12 @@ export default function FinancialJourney() {
             pathLength={pathLength}
             containerRef={containerRef}
           />
+
+          <p className="fj-subtitle fj-card-2-subtitle">
+            Follow your financial journey with ExpenseFlow. Track every
+            transaction, understand your spending habits, build better budgets,
+            and reach your savings goals with confidence.
+          </p>
 
           <TagCard
             number="03"
