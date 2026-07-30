@@ -12,7 +12,10 @@ import {
 } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useAuth } from '../context/AuthContext';
-import { sidebarNavVariants, sidebarItemVariants } from '../utils/motionVariants';
+import {
+  sidebarNavVariants,
+  sidebarItemVariants,
+} from '../utils/motionVariants';
 
 const NAV_LINKS = [
   { to: '/dashboard', label: 'Dashboard', Icon: LayoutDashboard },
@@ -22,6 +25,7 @@ const NAV_LINKS = [
   {
     to: 'https://medhanasoorya-portfolio.vercel.app/',
     label: 'Contact Us',
+    target: '_blank', 
     Icon: Phone,
   },
 ];
