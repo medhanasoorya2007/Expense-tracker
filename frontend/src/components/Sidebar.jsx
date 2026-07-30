@@ -60,7 +60,7 @@ function Sidebar({ isOpen, onClose }) {
           initial="hidden"
           animate="visible"
         >
-          {NAV_LINKS.map(({ to, label, Icon }) => (
+          {NAV_LINKS.map(({ to, label, Icon, target }) => (
             <motion.li key={to} variants={sidebarItemVariants}>
               <NavLink
                 to={to}
@@ -68,7 +68,9 @@ function Sidebar({ isOpen, onClose }) {
                 className={({ isActive }) =>
                   `sidebar-link ${isActive ? 'sidebar-link--active' : ''}`
                 }
-                id={`sidebar-link-${label.toLowerCase()}`}
+                id={`sidebar-link-${label.toLowerCase().replace(/\s+/g, '-')}`}
+                target={target}
+                rel={target === '_blank' ? 'noopener noreferrer' : undefined}
               >
                 <Icon className="sidebar-link-icon" size={20} />
                 <span className="sidebar-link-label">{label}</span>
