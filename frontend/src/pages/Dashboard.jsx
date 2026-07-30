@@ -56,20 +56,16 @@ function Dashboard() {
   // ── Derived chart data ───────────────────────────────────────────────────
 
   // Pie chart — Income vs Expense
-  const pieData = data
-    ? [
-      { name: "Income", value: data.monthlyIncome },
-      { name: "Expense", value: data.monthlyExpense },
-    ]
-    : [];
 
   // Bar chart — Monthly Income vs Expense (Mocked current month for now)
-  const currentMonthName = new Date().toLocaleString('default', { month: 'short' });
-  const barData = data ? [
-    { name: currentMonthName, Income: data.monthlyIncome, Expense: data.monthlyExpense }
-  ] : [];
 
   // Gauge chart — Savings %
+  const categoryData = data?.expenseDistribution?.map(({ category, amount }) => ({
+    name: category,
+    value: amount,
+  })) || [];
+  const trendData = data?.trend || [];
+
   const savingsRate = data?.monthlyIncome > 0
     ? ((data.monthlyIncome - data.monthlyExpense) / data.monthlyIncome) * 100
     : 0;
@@ -123,31 +119,31 @@ function Dashboard() {
       </div>
 
       {/* ── Charts row ───────────────────────────────────────────────────── */}
-      <div className="chart-row">
+      <div className="dashboard-charts">
         {/* Pie chart */}
-        <div className="chart-card">
-          <h2 className="chart-card-title">Income vs Expense</h2>
-          {pieData.every((d) => d.value === 0) ? (
-            <p className="chart-empty">No data for this month yet.</p>
+        <div className="chart-card chart-card--full">
+          <h2 className="chart-card-title">Income vs Expense Trend</h2>
+          {trendData.every((item) => item.Income === 0 && item.Expense === 0) ? (
+            <p className="chart-empty">No data from the last six months yet.</p>
           ) : (
-            <Chart type="pie" data={pieData} />
+            <Chart type="line" data={trendData} series={[{ key: "Income", color: "#22C55E" }, { key: "Expense", color: "#EF4444" }]} />
           )}
         </div>
 
         {/* Bar chart */}
         <div className="chart-card">
-          <h2 className="chart-card-title">Monthly Income vs Expense</h2>
-          {barData.length === 0 ? (
-            <p className="chart-empty">No data yet.</p>
+          <h2 className="chart-card-title">Expense by Category</h2>
+          {categoryData.length === 0 ? (
+            <p className="chart-empty">No expense data for this month yet.</p>
           ) : (
-            <Chart type="bar" data={barData} />
+            <Chart type="pie" data={categoryData} />
           )}
         </div>
 
         {/* Gauge chart */}
-        <div className="chart-card chart-card--full" style={{ gridColumn: "1 / -1" }}>
+        <div className="chart-card">
           <h2 className="chart-card-title">Savings Rate</h2>
-          <Chart type="gauge" data={savingsRate} />
+          <Chart type="gauge" data={savingsRate} detail={formatCurrency(data?.savings || 0)} />
         </div>
       </div>
 

@@ -9,11 +9,17 @@ import dashboardRouter from './routes/dashboardRoutes.js';
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+const allowedOrigins = [
+  'https://expenseflow-plus.vercel.app',
+  'http://localhost:5173',
+  'http://127.0.0.1:5173',
+  process.env.CLIENT_URL,
+].filter(Boolean);
 
 // Middleware
 app.use(
   cors({
-    origin: 'https://expenseflow-plus.vercel.app',
+    origin: allowedOrigins,
     credentials: true,
   })
 );

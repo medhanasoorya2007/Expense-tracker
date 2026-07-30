@@ -872,6 +872,17 @@ select.form-input {
   font-size: 0.75rem;
 }
 
+.chart-tooltip-value {
+  font-weight: 700;
+  margin: 0;
+}
+
+.chart-tooltip-meta {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  margin: 4px 0 0;
+}
+
 /* ── 14. GAUGE CHART ─────────────────────────────────────────────────────── */
 .gauge-wrapper {
   display: flex;

@@ -22,6 +22,7 @@ import Modal from "../components/Modal";
 import Chart from "../components/Chart";
 import { TrendingUp, Download, Plus } from "lucide-react";
 import formatCurrency from "../utils/formatCurrency";
+import { groupByCategory, groupByMonth } from "../utils/chartData";
 
 // Fixed dropdown categories for income
 const INCOME_CATEGORIES = ["Salary", "Freelance", "Investment", "Other"];
@@ -180,20 +181,10 @@ function Income() {
   const totalIncome = incomes.reduce((acc, curr) => acc + curr.amount, 0);
 
   // Pie chart — Income by Category
-  const categoryMap = incomes.reduce((acc, curr) => {
-    acc[curr.category] = (acc[curr.category] || 0) + curr.amount;
-    return acc;
-  }, {});
-  const pieData = Object.keys(categoryMap).map(key => ({
-    name: key,
-    value: categoryMap[key]
-  }));
+  const pieData = groupByCategory(incomes);
 
   // Bar chart — Monthly Income
-  const currentMonthName = new Date().toLocaleString('default', { month: 'short' });
-  const barData = incomes.length > 0 ? [
-    { name: currentMonthName, Income: totalIncome }
-  ] : [];
+  const barData = groupByMonth(incomes, "Income");
 
   // ── Render ──────────────────────────────────────────────────────────────
   return (
@@ -228,11 +219,11 @@ function Income() {
           )}
         </div>
         <div className="chart-card">
-          <h2 className="chart-card-title">Monthly Income</h2>
+          <h2 className="chart-card-title">Income Trend</h2>
           {barData.length === 0 ? (
             <p className="chart-empty">No data available.</p>
           ) : (
-            <Chart type="bar" data={barData} />
+            <Chart type="bar" data={barData} series={[{ key: "Income", color: "#22C55E" }]} />
           )}
         </div>
       </div>

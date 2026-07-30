@@ -22,6 +22,7 @@ import Modal from "../components/Modal";
 import Chart from "../components/Chart";
 import { TrendingDown, Download, Plus, BadgeIndianRupee } from "lucide-react";
 import formatCurrency from "../utils/formatCurrency";
+import { groupByCategory, groupByMonth } from "../utils/chartData";
 
 // Fixed dropdown categories for expenses
 const EXPENSE_CATEGORIES = ["Food", "Travel", "Housing", "Utilities", "Shopping", "Health", "Education", "Entertainment", "PersonalCare", "EMILoans", "Insurance", "Family", "GiftsAndDonations", "Taxes", "Miscellaneous"];
@@ -177,20 +178,10 @@ function Expense() {
   const totalExpense = expenses.reduce((acc, curr) => acc + curr.amount, 0);
 
   // Pie chart — Expense by Category
-  const categoryMap = expenses.reduce((acc, curr) => {
-    acc[curr.category] = (acc[curr.category] || 0) + curr.amount;
-    return acc;
-  }, {});
-  const pieData = Object.keys(categoryMap).map(key => ({
-    name: key,
-    value: categoryMap[key]
-  }));
+  const pieData = groupByCategory(expenses);
 
   // Bar chart — Monthly Expense
-  const currentMonthName = new Date().toLocaleString('default', { month: 'short' });
-  const barData = expenses.length > 0 ? [
-    { name: currentMonthName, Expense: totalExpense }
-  ] : [];
+  const barData = groupByMonth(expenses, "Expense");
 
   // ── Render ──────────────────────────────────────────────────────────────
   return (
@@ -225,11 +216,11 @@ function Expense() {
           )}
         </div>
         <div className="chart-card">
-          <h2 className="chart-card-title">Monthly Expense</h2>
+          <h2 className="chart-card-title">Expense Trend</h2>
           {barData.length === 0 ? (
             <p className="chart-empty">No data available.</p>
           ) : (
-            <Chart type="bar" data={barData} />
+            <Chart type="bar" data={barData} series={[{ key: "Expense", color: "#EF4444" }]} />
           )}
         </div>
       </div>
