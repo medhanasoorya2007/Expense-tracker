@@ -26,6 +26,8 @@
 import { useState } from "react";
 import { Routes, Route, Navigate, } from "react-router-dom";
 
+import LandingPage from "../landing/pages/LandingPage";
+
 // Layout components
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
@@ -71,8 +73,8 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
 
-      {/* ── Redirect root to dashboard ── */}
-      <Route path="/" element={<Navigate to="/dashboard" replace />} />
+      {/* ── Landing Page ── */}
+      <Route path="/" element={<LandingPage />} />
 
       {/* ── Protected routes — wrapped in DashboardLayout ── */}
       <Route

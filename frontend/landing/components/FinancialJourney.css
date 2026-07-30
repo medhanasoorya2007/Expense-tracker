@@ -1,0 +1,347 @@
+/* ==========================================================================
+   Financial Journey CSS Stylesheet (FinancialJourney.css)
+   --------------------------------------------------------------------------
+   STYLE ARCHITECTURE & DESIGN SYSTEM:
+   - Plain CSS styling for the interactive scroll-driven ExpenseFlow timeline.
+   - Replaces all Tailwind CSS utilities with semantic CSS classes.
+   - Formatted into organized blocks: Section Wrapper, Header, SVG Path,
+     Tag Cards, Active States, and Responsive Design.
+   ========================================================================== */
+
+/* ==========================================================================
+   1. SECTION WRAPPER & GRID BACKGROUND
+   ========================================================================== */
+.fj-section {
+  background-color: var(--color-surface, #ffffff);
+  padding-top: 96px;
+  padding-bottom: 128px;
+  padding-left: 24px;
+  padding-right: 24px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  font-family: var(--font-family-sans, 'Inter', sans-serif);
+  /* Architectural 80px grid pattern */
+  background-image: 
+    linear-gradient(to right, rgba(128, 128, 128, 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(128, 128, 128, 0.07) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+
+.fj-container {
+  max-width: 1150px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  min-height: 1350px;
+}
+
+@media (max-width: 768px) {
+  .fj-section {
+    padding-top: 60px;
+    padding-bottom: 60px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  
+  .fj-container {
+    min-height: auto;
+  }
+}
+
+/* ==========================================================================
+   2. HEADER CONTENT BLOCK
+   ========================================================================== */
+.fj-header {
+  position: relative;
+  z-index: 20;
+  margin-bottom: 64px;
+}
+
+@media (min-width: 768px) {
+  .fj-header {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 450px;
+    margin-bottom: 0;
+  }
+}
+
+.fj-badge {
+  display: inline-block;
+  border: 1px solid var(--color-border-subtle, #cbd5e1);
+  border-radius: 9999px;
+  padding: 6px 20px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-on-surface-variant, #475569);
+  margin-bottom: 32px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  background-color: #ffffff;
+  letter-spacing: 0.02em;
+}
+
+.fj-title {
+  font-size: clamp(2.25rem, 5vw, 3.75rem);
+  font-weight: 800;
+  color: var(--color-on-surface, #0f172a);
+  line-height: 1.1;
+  margin-bottom: 24px;
+  letter-spacing: -0.03em;
+  position: relative;
+}
+
+.fj-arrow-svg {
+  position: absolute;
+  bottom: -40px;
+  right: 40px;
+  width: 48px;
+  height: 48px;
+  color: var(--color-primary, #0f172a);
+}
+
+.fj-subtitle {
+  color: var(--color-on-surface-variant, #64748b);
+  font-size: 1rem;
+  line-height: 1.6;
+  max-width: 380px;
+}
+
+/* ==========================================================================
+   3. ANIMATED SVG PATHS (DESKTOP & MOBILE)
+   ========================================================================== */
+.fj-svg-desktop {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1350px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@media (min-width: 768px) {
+  .fj-svg-desktop {
+    display: block;
+  }
+}
+
+.fj-svg-mobile {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@media (min-width: 768px) {
+  .fj-svg-mobile {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   4. CARDS CONTAINER & LUGGAGE TAG CARDS
+   ========================================================================== */
+.fj-cards-container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-items: center;
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  padding-top: 16px;
+  padding-bottom: 48px;
+}
+
+@media (min-width: 768px) {
+  .fj-cards-container {
+    display: block;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+
+/* Base Luggage Tag Card */
+.fj-tag-card {
+  width: 288px;
+  border-radius: 32px;
+  padding: 8px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 10;
+  cursor: pointer;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.06);
+}
+
+@media (min-width: 640px) {
+  .fj-tag-card {
+    width: 330px;
+  }
+}
+
+.fj-tag-card:hover {
+  transform: scale(1.03) translateY(-6px) !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+}
+
+/* Active Highlight State when Scroll Line Tip Reaches Card */
+.fj-tag-card.active {
+  background-color: #191c1d;
+  border-color: #000000;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+}
+
+/* Circular Hole Punch Cutout at Top of Tag Card */
+.fj-hole-punch {
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(135deg, #cbd5e1, #f1f5f9);
+  border-radius: 50%;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+  position: absolute;
+  top: 16px;
+  border: 1px solid #cbd5e1;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fj-hole-inner {
+  width: 8px;
+  height: 8px;
+  background-color: #1e293b;
+  border-radius: 50%;
+  opacity: 0.25;
+}
+
+/* Inner Content Card Box */
+.fj-card-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 24px;
+  margin-top: 32px;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  min-height: 220px;
+  transition: background-color 0.7s ease, color 0.7s ease;
+  background-color: #f8f9fa;
+}
+
+.fj-tag-card.active .fj-card-inner {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.fj-card-number {
+  font-size: 1.25rem;
+  margin-bottom: 8px;
+  font-family: var(--font-family-mono, monospace);
+  font-style: italic;
+  color: #94a3b8;
+  transition: color 0.7s ease;
+  font-weight: 600;
+}
+
+.fj-tag-card.active .fj-card-number {
+  color: #93c5fd;
+}
+
+.fj-card-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+  color: #0f172a;
+  transition: color 0.7s ease;
+}
+
+.fj-tag-card.active .fj-card-title {
+  color: #ffffff;
+}
+
+.fj-card-text {
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: #64748b;
+  transition: color 0.7s ease;
+}
+
+.fj-tag-card.active .fj-card-text {
+  color: #e2e8f0;
+}
+
+/* ==========================================================================
+   5. DESKTOP ABSOLUTE POSITIONING & ROTATION ANGLE VARIANTS
+   ========================================================================== */
+@media (min-width: 768px) {
+  .fj-card-1 {
+    position: absolute;
+    top: 10px;
+    right: 5%;
+    transform: rotate(6deg);
+  }
+  
+  .fj-card-2 {
+    position: absolute;
+    top: 430px;
+    left: 5%;
+    transform: rotate(-6deg);
+  }
+  
+  .fj-card-3 {
+    position: absolute;
+    top: 700px;
+    right: 8%;
+    transform: rotate(3deg);
+  }
+  
+  .fj-card-4 {
+    position: absolute;
+    top: 1030px;
+    left: 18%;
+    transform: rotate(-3deg);
+  }
+}
+
+@media (min-width: 1024px) {
+  .fj-card-1 { right: 10%; }
+  .fj-card-2 { left: 10%; }
+  .fj-card-3 { right: 15%; }
+  .fj-card-4 { left: 25%; }
+}
+
+/* ==========================================================================
+   6. FOOTER NOTE ("Every Rupee Counts.")
+   ========================================================================== */
+.fj-footer-note {
+  display: none;
+  position: absolute;
+  top: 1260px;
+  left: 58%;
+  font-family: 'Georgia', serif;
+  font-style: italic;
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: var(--color-primary-accent, #0050cb);
+  transform: rotate(4deg);
+}
+
+@media (min-width: 768px) {
+  .fj-footer-note {
+    display: block;
+  }
+}
