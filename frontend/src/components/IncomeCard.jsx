@@ -9,7 +9,9 @@
  *   onDelete {function} – called with income._id when Delete is clicked
  */
 
+import { motion } from 'motion/react';
 import formatCurrency from '../utils/formatCurrency';
+import { listItemVariants } from '../utils/motionVariants';
 import {
   SquarePen,
   Trash,
@@ -52,7 +54,7 @@ function IncomeCard({ income, onEdit, onDelete }) {
   );
 
   return (
-    <div className="record-card record-card--income">
+    <motion.div className="record-card record-card--income" variants={listItemVariants}>
       {/* Left: category icon + text */}
       <div className="record-card-left">
         <div className="record-card-icon">{icon}</div>
@@ -90,7 +92,7 @@ function IncomeCard({ income, onEdit, onDelete }) {
           </button>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

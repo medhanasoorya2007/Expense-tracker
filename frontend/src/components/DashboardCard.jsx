@@ -10,11 +10,18 @@
  *   type   {"income"|"expense"|"balance"} – drives the color accent class
  */
 
+import { motion } from "motion/react";
 import formatCurrency from "../utils/formatCurrency";
+import { cardVariants } from "../utils/motionVariants";
 
 function DashboardCard({ title, amount, icon, type = "balance" }) {
   return (
-    <div className={`dashboard-card dashboard-card--${type}`}>
+    <motion.div
+      className={`dashboard-card dashboard-card--${type}`}
+      variants={cardVariants}
+      initial="hidden"
+      animate="visible"
+    >
       {/* Icon bubble */}
       {icon &&
         <div className="dashboard-card-icon">
@@ -30,7 +37,7 @@ function DashboardCard({ title, amount, icon, type = "balance" }) {
           {formatCurrency(amount ?? 0)}
         </p>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

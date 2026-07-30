@@ -17,6 +17,7 @@
 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "motion/react";
 import api from "../services/api";
 import { useAuth } from "../context/AuthContext";
 import Loader from "../components/Loader";
@@ -24,6 +25,7 @@ import DashboardCard from "../components/DashboardCard";
 import Chart from "../components/Chart";
 import formatCurrency from "../utils/formatCurrency";
 import { TrendingUp, TrendingDown, Wallet, Hand, Mail, ExternalLink, ArrowDownToLine, ArrowUpFromLine } from "lucide-react";
+import { pageVariants, listContainerVariants, listItemVariants } from "../utils/motionVariants";
 
 function Dashboard() {
   const { user } = useAuth();
@@ -85,7 +87,7 @@ function Dashboard() {
   }
 
   return (
-    <div className="page">
+    <motion.div className="page" variants={pageVariants} initial="hidden" animate="visible">
       {/* ── Greeting header ─────────────────────────────────────────────── */}
       <div className="page-header">
         <h1 className="page-title">
@@ -157,9 +159,15 @@ function Dashboard() {
         {(!data?.recentTransactions || data.recentTransactions.length === 0) ? (
           <p className="empty-state">No transactions yet this month.</p>
         ) : (
-          <ul className="recent-list" role="list">
+          <motion.ul
+            className="recent-list"
+            role="list"
+            variants={listContainerVariants}
+            initial="hidden"
+            animate="visible"
+          >
             {data.recentTransactions.slice(0, 6).map((tx) => (
-              <li key={tx._id} className={`recent-item recent-item--${tx.type}`}>
+              <motion.li key={tx._id} className={`recent-item recent-item--${tx.type}`} variants={listItemVariants}>
                 <div className="recent-item-left">
                   <span className="recent-item-icon">
                     {tx.type === "income" ? <ArrowDownToLine color="#22C55E" /> : <ArrowUpFromLine color="#EF4444" />}
@@ -180,9 +188,9 @@ function Dashboard() {
                   {tx.type === "income" ? "+" : "-"}
                   {formatCurrency(tx.amount)}
                 </span>
-              </li>
+              </motion.li>
             ))}
-          </ul>
+          </motion.ul>
         )}
       </div>
 
@@ -203,7 +211,7 @@ function Dashboard() {
           + Add Expense
         </button>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

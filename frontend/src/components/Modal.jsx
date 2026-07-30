@@ -1,6 +1,8 @@
 //components/Modal.jsx
 
 import { useEffect } from "react";
+import { motion, AnimatePresence } from "motion/react";
+import { overlayVariants, modalBoxVariants } from "../utils/motionVariants";
 
 function Modal({ isOpen, onClose, title, children }) {
   // ── Close modal on Escape key press ─────────────────────────────────────
@@ -18,36 +20,46 @@ function Modal({ isOpen, onClose, title, children }) {
     return () => { document.body.style.overflow = ""; };
   }, [isOpen]);
 
-  if (!isOpen) return null;
-
   return (
-    <div
-      className="modal-overlay"
-      onClick={onClose}             /* click outside → close */
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="modal-title"
-    >
-      <div
-        className="modal-box"
-        onClick={(e) => e.stopPropagation()} /* prevent bubbling to overlay */
-      >
-        {/* Header */}
-        <div className="modal-header">
-          <h2 id="modal-title" className="modal-title">{title}</h2>
-          <button
-            className="modal-close-btn"
-            onClick={onClose}
-            aria-label="Close modal"
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          className="modal-overlay"
+          onClick={onClose}             /* click outside → close */
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="modal-title"
+          variants={overlayVariants}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+        >
+          <motion.div
+            className="modal-box"
+            onClick={(e) => e.stopPropagation()} /* prevent bubbling to overlay */
+            variants={modalBoxVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
           >
-            ✕
-          </button>
-        </div>
+            {/* Header */}
+            <div className="modal-header">
+              <h2 id="modal-title" className="modal-title">{title}</h2>
+              <button
+                className="modal-close-btn"
+                onClick={onClose}
+                aria-label="Close modal"
+              >
+                ✕
+              </button>
+            </div>
 
-        {/* Body */}
-        <div className="modal-body">{children}</div>
-      </div>
-    </div>
+            {/* Body */}
+            <div className="modal-body">{children}</div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
 

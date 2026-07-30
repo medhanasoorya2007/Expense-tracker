@@ -9,10 +9,12 @@
 
 import { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import { motion } from "motion/react";
 import api from "../services/api";
 import { useAuth } from "../context/AuthContext";
 import { CircleUserRound } from 'lucide-react';
 import DotGrid from "../styles/DotGrid";
+import { pageVariants } from "../utils/motionVariants";
 
 function Login() {
   const { login } = useAuth();
@@ -68,7 +70,7 @@ function Login() {
 
   // ── Render ───────────────────────────────────────────────────────────────
   return (
-    <div className="auth-page">
+    <motion.div className="auth-page" variants={pageVariants} initial="hidden" animate="visible">
       {/* Background layer */}
       <div className="auth-page-bg">
         <DotGrid
@@ -157,7 +159,7 @@ function Login() {
           </p>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

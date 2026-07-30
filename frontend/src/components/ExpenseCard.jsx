@@ -10,7 +10,9 @@
  */
 
 import { RiEditLine, RiDeleteBin6Line } from "react-icons/ri";
+import { motion } from "motion/react";
 import formatCurrency from "../utils/formatCurrency";
+import { listItemVariants } from "../utils/motionVariants";
 import {
   BriefcaseBusiness,
   Laptop,
@@ -73,7 +75,7 @@ function ExpenseCard({ expense, onEdit, onDelete }) {
   const icon = CATEGORY_ICONS[category] ?? <BadgeIndianRupee size={20} color="#6B7280" />;
 
   return (
-    <div className="record-card record-card--expense">
+    <motion.div className="record-card record-card--expense" variants={listItemVariants}>
       {/* Left: category icon + text */}
       <div className="record-card-left">
         <div className="record-card-icon">{icon}</div>
@@ -111,7 +113,7 @@ function ExpenseCard({ expense, onEdit, onDelete }) {
           </button>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

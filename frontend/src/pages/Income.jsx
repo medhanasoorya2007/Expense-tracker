@@ -15,6 +15,7 @@
  */
 
 import { useEffect, useState, useCallback } from "react";
+import { motion } from "motion/react";
 import api from "../services/api";
 import IncomeCard from "../components/IncomeCard";
 import Loader from "../components/Loader";
@@ -23,6 +24,7 @@ import Chart from "../components/Chart";
 import { TrendingUp, Download, Plus } from "lucide-react";
 import formatCurrency from "../utils/formatCurrency";
 import { groupByCategory, groupByMonth } from "../utils/chartData";
+import { pageVariants, listContainerVariants } from "../utils/motionVariants";
 
 // Fixed dropdown categories for income
 const INCOME_CATEGORIES = ["Salary", "Freelance", "Investment", "Other"];
@@ -188,7 +190,7 @@ function Income() {
 
   // ── Render ──────────────────────────────────────────────────────────────
   return (
-    <div className="page">
+    <motion.div className="page" variants={pageVariants} initial="hidden" animate="visible">
       {/* Header */}
       <div className="page-header page-header--row">
         <div>
@@ -261,7 +263,12 @@ function Income() {
           </button>
         </div>
       ) : (
-        <div className="record-list">
+        <motion.div
+          className="record-list"
+          variants={listContainerVariants}
+          initial="hidden"
+          animate="visible"
+        >
           {incomes.map((income) => (
             <IncomeCard
               key={income._id}
@@ -270,7 +277,7 @@ function Income() {
               onDelete={(id) => setDeleteId(id)}
             />
           ))}
-        </div>
+        </motion.div>
       )}
 
       {/* ── Add / Edit Modal ─────────────────────────────────────────── */}
@@ -400,7 +407,7 @@ function Income() {
           </button>
         </div>
       </Modal>
-    </div>
+    </motion.div>
   );
 }
 

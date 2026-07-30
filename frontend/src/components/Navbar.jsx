@@ -9,7 +9,9 @@
 import { useState, useRef, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Wallet, User, LogOut, Menu } from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
 import { useAuth } from "../context/AuthContext";
+import { dropdownVariants } from "../utils/motionVariants";
 
 
 // Route → Page title mapping
@@ -100,46 +102,54 @@ function Navbar({ onMenuToggle }) {
         </div>
 
         {/* Dropdown Menu */}
-        {open && (
-          <div className="navbar-dropdown">
-
-            {/* User Information */}
-            <div className="navbar-dropdown-header">
-              <p className="navbar-dropdown-name">
-                {user?.name}
-              </p>
-
-              <p className="navbar-dropdown-email">
-                {user?.email}
-              </p>
-            </div>
-
-            {/* Navigate to Profile */}
-            <div
-              className="navbar-dropdown-item"
-              onClick={() => {
-                setOpen(false);
-                navigate("/profile");
-              }}
+        <AnimatePresence>
+          {open && (
+            <motion.div
+              className="navbar-dropdown"
+              variants={dropdownVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
             >
-              <User size={16} />
-              <span>Profile</span>
-            </div>
 
-            {/* Logout User */}
-            <div
-              className="navbar-dropdown-item navbar-dropdown-item--danger"
-              onClick={() => {
-                setOpen(false);
-                logout();
-              }}
-            >
-              <LogOut size={16} />
-              <span>Logout</span>
-            </div>
+              {/* User Information */}
+              <div className="navbar-dropdown-header">
+                <p className="navbar-dropdown-name">
+                  {user?.name}
+                </p>
 
-          </div>
-        )}
+                <p className="navbar-dropdown-email">
+                  {user?.email}
+                </p>
+              </div>
+
+              {/* Navigate to Profile */}
+              <div
+                className="navbar-dropdown-item"
+                onClick={() => {
+                  setOpen(false);
+                  navigate("/profile");
+                }}
+              >
+                <User size={16} />
+                <span>Profile</span>
+              </div>
+
+              {/* Logout User */}
+              <div
+                className="navbar-dropdown-item navbar-dropdown-item--danger"
+                onClick={() => {
+                  setOpen(false);
+                  logout();
+                }}
+              >
+                <LogOut size={16} />
+                <span>Logout</span>
+              </div>
+
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
     </nav>

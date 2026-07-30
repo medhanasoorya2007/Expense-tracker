@@ -15,6 +15,7 @@
  */
 
 import { useEffect, useState, useCallback } from "react";
+import { motion } from "motion/react";
 import api from "../services/api";
 import ExpenseCard from "../components/ExpenseCard";
 import Loader from "../components/Loader";
@@ -23,6 +24,7 @@ import Chart from "../components/Chart";
 import { TrendingDown, Download, Plus, BadgeIndianRupee } from "lucide-react";
 import formatCurrency from "../utils/formatCurrency";
 import { groupByCategory, groupByMonth } from "../utils/chartData";
+import { pageVariants, listContainerVariants } from "../utils/motionVariants";
 
 // Fixed dropdown categories for expenses
 const EXPENSE_CATEGORIES = ["Food", "Travel", "Housing", "Utilities", "Shopping", "Health", "Education", "Entertainment", "PersonalCare", "EMILoans", "Insurance", "Family", "GiftsAndDonations", "Taxes", "Miscellaneous"];
@@ -185,7 +187,7 @@ function Expense() {
 
   // ── Render ──────────────────────────────────────────────────────────────
   return (
-    <div className="page">
+    <motion.div className="page" variants={pageVariants} initial="hidden" animate="visible">
       {/* Header */}
       <div className="page-header page-header--row">
         <div>
@@ -258,7 +260,12 @@ function Expense() {
           </button>
         </div>
       ) : (
-        <div className="record-list">
+        <motion.div
+          className="record-list"
+          variants={listContainerVariants}
+          initial="hidden"
+          animate="visible"
+        >
           {expenses.map((expense) => (
             <ExpenseCard
               key={expense._id}
@@ -267,7 +274,7 @@ function Expense() {
               onDelete={(id) => setDeleteId(id)}
             />
           ))}
-        </div>
+        </motion.div>
       )}
 
       {/* ── Add / Edit Modal ─────────────────────────────────────────── */}
@@ -390,7 +397,7 @@ function Expense() {
           </button>
         </div>
       </Modal>
-    </div>
+    </motion.div>
   );
 }
 

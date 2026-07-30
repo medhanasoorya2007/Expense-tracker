@@ -10,7 +10,9 @@ import {
   Phone,
   LogOut,
 } from 'lucide-react';
+import { motion } from 'motion/react';
 import { useAuth } from '../context/AuthContext';
+import { sidebarNavVariants, sidebarItemVariants } from '../utils/motionVariants';
 
 const NAV_LINKS = [
   { to: '/dashboard', label: 'Dashboard', Icon: LayoutDashboard },
@@ -47,9 +49,15 @@ function Sidebar({ isOpen, onClose }) {
           </div>
         </div>
 
-        <ul className="sidebar-nav" role="list">
+        <motion.ul
+          className="sidebar-nav"
+          role="list"
+          variants={sidebarNavVariants}
+          initial="hidden"
+          animate="visible"
+        >
           {NAV_LINKS.map(({ to, label, Icon }) => (
-            <li key={to}>
+            <motion.li key={to} variants={sidebarItemVariants}>
               <NavLink
                 to={to}
                 onClick={onClose}
@@ -61,9 +69,9 @@ function Sidebar({ isOpen, onClose }) {
                 <Icon className="sidebar-link-icon" size={20} />
                 <span className="sidebar-link-label">{label}</span>
               </NavLink>
-            </li>
+            </motion.li>
           ))}
-        </ul>
+        </motion.ul>
 
         <div className="sidebar-footer">
           <button

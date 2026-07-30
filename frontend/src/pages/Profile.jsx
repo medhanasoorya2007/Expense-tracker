@@ -15,9 +15,11 @@
  */
 
 import { useEffect, useState } from "react";
+import { motion } from "motion/react";
 import api from "../services/api";
 import { useAuth } from "../context/AuthContext";
 import Loader from "../components/Loader";
+import { pageVariants } from "../utils/motionVariants";
 
 function Profile() {
   const { user: ctxUser, login, token, logout } = useAuth();
@@ -139,7 +141,7 @@ function Profile() {
 
 
   return (
-    <div className="page">
+    <motion.div className="page" variants={pageVariants} initial="hidden" animate="visible">
       <div className="page-header">
         <h1 className="page-title">Profile</h1>
         <p className="page-subtitle">Manage your account settings</p>
@@ -331,7 +333,7 @@ function Profile() {
 
       </div>
       {/* End profile-layout */}
-    </div>
+    </motion.div>
   );
 }
 
